@@ -6,8 +6,20 @@ def num_words(book_text):
 def character_count(book_text):
 	dict_characters = {}
 	lower_text = book_text.lower()
-	characters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", ".", ",", "?", "!"]
-	for character in characters:
-		dict_characters[character] = lower_text.count(character)
+	for character in lower_text:
+		if character in dict_characters:
+			dict_characters[character] += 1
+		else:
+			dict_characters[character] = 1
 	return dict_characters
 
+def sort_on(dict):
+	return dict["count"]
+
+def organized_list(book_text):
+	dict_characters = character_count(book_text)
+	character_list = []
+	for char, count in dict_characters.items():
+		character_list.append({"char": char, "count": count})
+	character_list.sort(reverse=True, key=sort_on)
+	return character_list
